@@ -1,0 +1,12 @@
+{
+    "users": [
+        {
+        "id": 1,
+        "name": "Gildo Junior",
+        "email": "1gildojunior@gmail.com",
+        "phone": "48991333748",
+        "img": "https://i.ibb.co/5THScbt/1622786726671.jpg",
+        "isAdm": true
+    }
+]
+}
