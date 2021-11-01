@@ -1,23 +1,22 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  flex: {
+  form: {
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  },
-  form: {
     flexDirection: "column",
   },
   avatar: {
-    width: theme.spacing(20),
-    height: theme.spacing(20),
+    width: `${theme.spacing(20)}px !important`,
+    height: `${theme.spacing(20)}px !important`,
     marginBottom: "2rem",
   },
   input: {
     "&:disabled": {
       color: "#262626",
     },
-    marginBottom: "2rem",
+    marginBottom: "2rem !important",
   },
   headerPersonAccount: {
     justifyContent: "space-between",
