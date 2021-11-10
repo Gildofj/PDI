@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   iconButton: {
     width: theme.spacing(4),
     height: theme.spacing(4),
+    color: "rgba(0, 0, 0, 0.87)",
   },
 }));
 

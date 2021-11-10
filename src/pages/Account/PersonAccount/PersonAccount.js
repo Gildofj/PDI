@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Divider from "@material-ui/core/Divider";
 import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
-import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import CloseIcon from "@material-ui/icons/Close";
 import SaveIcon from "@material-ui/icons/Save";
@@ -36,17 +36,17 @@ export default function PersonAccount() {
             </Flex>
             <Flex className={globalClasses.header}>
               {isEdit && (
-                <Button>
+                <IconButton type="submit" variant="secondary">
                   <SaveIcon className={classes.iconButton} />
-                </Button>
+                </IconButton>
               )}
-              <Button onClick={handleToggleEdit}>
+              <IconButton onClick={handleToggleEdit}>
                 {isEdit ? (
                   <CloseIcon className={classes.iconButton} />
                 ) : (
                   <EditIcon className={classes.iconButton} />
                 )}
-              </Button>
+              </IconButton>
             </Flex>
           </Flex>
         }

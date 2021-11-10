@@ -19,7 +19,7 @@ export default function FormPersonAccount({
   const classes = useStyles();
 
   function handleSubmit(event) {
-    console.log(event.target.value);
+    console.log("teste");
   }
 
   return (
