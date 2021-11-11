@@ -13,7 +13,7 @@
         {
             "id": 1,
             "name": "Call of Duty",
-            "preco": "300"
+            "price": "300"
         } 
     ]
 }

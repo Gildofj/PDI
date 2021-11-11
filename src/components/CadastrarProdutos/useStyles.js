@@ -1,16 +1,17 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
+  flex: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   form: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-  },
-  avatar: {
-    width: `${theme.spacing(20)}px !important`,
-    height: `${theme.spacing(20)}px !important`,
-    marginBottom: "2rem",
   },
   input: {
     "&:disabled": {
@@ -18,11 +19,6 @@ const useStyles = makeStyles((theme) => ({
     },
     marginBottom: "2rem !important",
   },
-  iconButton: {
-    width: theme.spacing(4),
-    height: theme.spacing(4),
-    color: "rgba(0, 0, 0, 0.87)",
-  },
-}));
+});
 
 export default useStyles;

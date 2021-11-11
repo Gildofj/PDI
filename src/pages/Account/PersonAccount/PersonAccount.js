@@ -1,10 +1,8 @@
 import { useState } from "react";
 import useSWR from "swr";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import Divider from "@material-ui/core/Divider";
+import { Card, CardHeader, Divider, IconButton } from "@material-ui/core";
+
 import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
-import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import CloseIcon from "@material-ui/icons/Close";
 import SaveIcon from "@material-ui/icons/Save";
@@ -29,7 +27,7 @@ export default function PersonAccount() {
     <Card>
       <CardHeader
         title={
-          <Flex className={classes.headerPersonAccount}>
+          <Flex className={globalClasses.header}>
             <Flex className={globalClasses.header}>
               <PersonRoundedIcon className={globalClasses.icon} />
               <div>Sua Conta</div>

@@ -1,6 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import CardContent from "@material-ui/core/CardContent";
-import Avatar from "@material-ui/core/Avatar";
+import { CardContent, Avatar } from "@material-ui/core";
 
 import useStyles from "./useStyles";
 import { TextField } from "@material-ui/core";
@@ -37,7 +36,7 @@ export default function FormPersonAccount({
               render={({ field, form: { isSubmitting } }) => (
                 <TextField
                   {...field}
-                  label="Name"
+                  label="Nome"
                   variant="standard"
                   className={classes.input}
                   disabled={!isEdit || isSubmitting}
@@ -62,7 +61,7 @@ export default function FormPersonAccount({
               render={({ field, form: { isSubmitting } }) => (
                 <TextField
                   {...field}
-                  label="Phone"
+                  label="Telefone"
                   variant="standard"
                   className={classes.input}
                   disabled={!isEdit || isSubmitting}
