@@ -11,7 +11,11 @@ import {
   Divider,
   CardHeader,
   Card,
+  IconButton,
 } from "@material-ui/core";
+
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import useStyles from "./useStyles";
 import useGlobalAccountStyles from "../useGlobalAccountStyles";
@@ -66,16 +70,35 @@ export default function Products() {
               <TableBody>
                 {products.map((product) => (
                   <TableRow
-                    hover
                     role="checkbox"
                     tabIndex={-1}
                     key={product.id}
+                    className={classes.row}
                   >
-                    {columns.map((column) => (
-                      <TableCell key={column.id} align={column.align}>
-                        {product[column.id]}
-                      </TableCell>
-                    ))}
+                    {columns.map((column) => {
+                      if (column.id === "price")
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {product[column.id]},00 R$
+                          </TableCell>
+                        );
+                      else
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {product[column.id]}
+                          </TableCell>
+                        );
+                    })}
+                    <Flex className={classes.buttonsSection}>
+                      <CadastrarProdutos
+                        icon={<EditIcon />}
+                        product={product}
+                      />
+
+                      <IconButton>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Flex>
                   </TableRow>
                 ))}
               </TableBody>

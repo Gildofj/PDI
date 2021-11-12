@@ -1,18 +1,27 @@
 import { useState } from "react";
-import { IconButton, Paper, Typography } from "@material-ui/core";
+import PropTypes from "prop-types";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Typography,
+} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
 import FormCadastrarProdutos from "./FormCadastrarProdutos";
 import Flex from "../Flex";
-import ModalPadrao from "../ModalPadrao";
 
 import useStyles from "./useStyles";
 
-export default function ModalCadastrarProdutos({
-  product,
-  children,
-  ...props
-}) {
+ModalCadastrarProdutos.propTypes = {
+  product: PropTypes.object,
+  icon: PropTypes.node,
+};
+
+export default function ModalCadastrarProdutos({ product, icon, ...props }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -20,21 +29,25 @@ export default function ModalCadastrarProdutos({
 
   return (
     <>
-      {children ? (
-        children({ ...props, onClick: handleToggleOpen })
-      ) : (
-        <IconButton onClick={handleToggleOpen} {...props}>
-          <AddIcon {...props} />
-        </IconButton>
-      )}
-      <ModalPadrao open={open} onClose={handleToggleOpen}>
+      <IconButton onClick={handleToggleOpen} {...props}>
+        {icon ? icon : <AddIcon {...props} />}
+      </IconButton>
+      <Dialog open={open} onClose={handleToggleOpen} className={classes.paper}>
         <Flex className={classes.flex}>
-          <Paper>
+          <DialogTitle>
             <Typography variant="h3">Cadastrar Produto</Typography>
+          </DialogTitle>
+          <DialogContent>
             <FormCadastrarProdutos product={product} sx={classes.form} />
-          </Paper>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleToggleOpen}>Cancelar</Button>
+            <Button color="primary" type="submit">
+              Cadastrar
+            </Button>
+          </DialogActions>
         </Flex>
-      </ModalPadrao>
+      </Dialog>
     </>
   );
 }

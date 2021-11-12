@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Field, Form, Formik } from "formik";
 import { CardContent, Avatar } from "@material-ui/core";
 
@@ -9,6 +10,11 @@ const initialValuesPerson = {
   email: "",
   phone: "",
   img: "",
+};
+
+FormPersonAccount.propTypes = {
+  user: PropTypes.object,
+  isEdit: PropTypes.bool,
 };
 
 export default function FormPersonAccount({

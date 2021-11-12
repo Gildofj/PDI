@@ -17,7 +17,7 @@ export default function PersonAccount() {
   const globalClasses = useGlobalAccountStyles();
   const [isEdit, setIsEdit] = useState(false);
 
-  const { data: user } = useSWR("/users/1");
+  const { data: user } = useSWR("/users/618ec19444cf8bc3f603b360");
 
   function handleToggleEdit() {
     setIsEdit(!isEdit);
