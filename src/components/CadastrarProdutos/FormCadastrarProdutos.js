@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
+import axios from "axios";
 import { Formik, Form, Field } from "formik";
 import { TextField } from "@material-ui/core";
+
 import useStyles from "./useStyles";
 
 const intialValuesProduct = {
@@ -8,22 +10,24 @@ const intialValuesProduct = {
   price: "",
 };
 
-function handleSubmit(event) {
-  console.log("teste");
-}
-
 FormCadastrarProdutos.propTypes = {
   product: PropTypes.object,
+  innerRef: PropTypes.object,
 };
 
 export default function FormCadastrarProdutos({
   product = intialValuesProduct,
+  innerRef = null,
 }) {
   const classes = useStyles();
 
+  function handleSubmit({ values }) {
+    axios.post("/products", values);
+  }
+
   return (
-    <Formik initialValues={product} onSubmit={handleSubmit}>
-      {(values, handleSubmit) => (
+    <Formik initialValues={product} onSubmit={handleSubmit} ref={innerRef}>
+      {({ handleSubmit }) => (
         <Form onSubmit={handleSubmit} className={classes.form}>
           <Field
             name="name"

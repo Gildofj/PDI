@@ -78,13 +78,13 @@ export default function Products() {
                     {columns.map((column) => {
                       if (column.id === "price")
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell key={product.id}>
                             {product[column.id]},00 R$
                           </TableCell>
                         );
                       else
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell key={products.id}>
                             {product[column.id]}
                           </TableCell>
                         );
