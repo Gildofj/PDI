@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import {
   Button,
@@ -19,18 +19,22 @@ import useStyles from "./useStyles";
 ModalCadastrarProdutos.propTypes = {
   product: PropTypes.object,
   icon: PropTypes.node,
+  callback: PropTypes.func,
 };
 
-export default function ModalCadastrarProdutos({ product, icon, ...props }) {
-  const formRef = useRef(null);
+export default function ModalCadastrarProdutos({
+  product,
+  icon,
+  callback,
+  ...props
+}) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-  const handleToggleOpen = () => setOpen(!open);
-
-  function handleSubmit() {
-    console.log(formRef);
-  }
+  const handleToggleOpen = (success = false) => {
+    setOpen(!open);
+    callback(success);
+  };
 
   return (
     <>
@@ -46,12 +50,12 @@ export default function ModalCadastrarProdutos({ product, icon, ...props }) {
             <FormCadastrarProdutos
               product={product}
               sx={classes.form}
-              innerRef={formRef}
+              callback={handleToggleOpen}
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleToggleOpen}>Cancelar</Button>
-            <Button color="primary" onCLick={handleSubmit}>
+            <Button color="primary" type="submit" form="form-cadastro-produto">
               Cadastrar
             </Button>
           </DialogActions>

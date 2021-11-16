@@ -12,7 +12,6 @@ import {
 
 const options = {
   fetcher: (url) => api.get(url).then((res) => res.data),
-  refreshInterval: 3000,
 };
 
 let theme = createTheme({

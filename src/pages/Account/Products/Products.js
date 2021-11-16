@@ -31,7 +31,11 @@ export default function Products() {
   const classes = useStyles();
   const globalClasses = useGlobalAccountStyles();
 
-  const { data: products } = useSWR("/products");
+  const { data: products, mutate } = useSWR("/products");
+
+  function cadastrarCallback(success) {
+    if (success) mutate();
+  }
 
   return (
     <Card>
@@ -43,7 +47,10 @@ export default function Products() {
               <div>Produtos</div>
             </Flex>
             <Flex>
-              <CadastrarProdutos fontSize="large" />
+              <CadastrarProdutos
+                fontSize="large"
+                callback={cadastrarCallback}
+              />
             </Flex>
           </Flex>
         }
