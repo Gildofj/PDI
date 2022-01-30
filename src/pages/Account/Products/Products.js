@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import WorkRoundedIcon from "@material-ui/icons/WorkRounded";
+import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
 import {
   Table,
   TableBody,
@@ -11,16 +11,16 @@ import {
   Divider,
   CardHeader,
   Card,
-  IconButton,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 import useStyles from "./useStyles";
 import useGlobalAccountStyles from "../useGlobalAccountStyles";
 import Flex from "../../../components/Flex";
-import CadastrarProdutos from "../../../components/CadastrarProdutos";
+import RegisterProducts from "../../../components/RegisterProducts";
+import ConfirmModal from "../../../components/ConfirmModal";
+import api from "../../../utils/api";
 
 const columns = [
   { id: "name", label: "Nome" },
@@ -33,8 +33,13 @@ export default function Products() {
 
   const { data: products, mutate } = useSWR("/products");
 
-  function cadastrarCallback(success) {
-    if (success) mutate();
+  function cadastrarCallback(success, value) {
+    if (success) mutate((data) => [...data, value]);
+  }
+
+  function excluirCallback(id) {
+    api.delete(`/products/${id}`);
+    mutate((data) => data.filter((product) => product._id !== id));
   }
 
   return (
@@ -47,10 +52,7 @@ export default function Products() {
               <div>Produtos</div>
             </Flex>
             <Flex>
-              <CadastrarProdutos
-                fontSize="large"
-                callback={cadastrarCallback}
-              />
+              <RegisterProducts fontSize="large" callback={cadastrarCallback} />
             </Flex>
           </Flex>
         }
@@ -79,32 +81,24 @@ export default function Products() {
                   <TableRow
                     role="checkbox"
                     tabIndex={-1}
-                    key={product.id}
+                    key={product._id}
                     className={classes.row}
                   >
                     {columns.map((column) => {
                       if (column.id === "price")
                         return (
-                          <TableCell key={product.id}>
-                            {product[column.id]},00 R$
-                          </TableCell>
+                          <TableCell>{product[column.id]},00 R$</TableCell>
                         );
-                      else
-                        return (
-                          <TableCell key={products.id}>
-                            {product[column.id]}
-                          </TableCell>
-                        );
+                      else return <TableCell>{product[column.id]}</TableCell>;
                     })}
                     <Flex className={classes.buttonsSection}>
-                      <CadastrarProdutos
-                        icon={<EditIcon />}
-                        product={product}
-                      />
+                      <RegisterProducts icon={<EditIcon />} product={product} />
 
-                      <IconButton>
-                        <DeleteIcon />
-                      </IconButton>
+                      <ConfirmModal
+                        title="Excluir Produto"
+                        content="Se você excluir esse produto não sera possível recupera-lo. Deseja continuar?"
+                        callback={() => excluirCallback(product._id)}
+                      />
                     </Flex>
                   </TableRow>
                 ))}

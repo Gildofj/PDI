@@ -3,32 +3,31 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import api from "./utils/api";
 import { SWRConfig } from "swr";
-import { ThemeProvider } from "@material-ui/styles";
 import {
   createTheme,
-  CssBaseline,
+  ThemeProvider,
   responsiveFontSizes,
-} from "@material-ui/core";
+} from "@mui/material/styles";
+
+import CssBaseline from "@mui/material/CssBaseline";
 
 const options = {
   fetcher: (url) => api.get(url).then((res) => res.data),
 };
 
 let theme = createTheme({
-  overrides: {
+  components: {
     MuiCssBaseline: {
-      "@global": {
+      styleOverrides: {
         html: {
           background: "#F6F7EB",
           color: "#262626",
           padding: "5px",
         },
-
         body: {
           height: "98vh",
           width: "100%",
         },
-
         a: {
           textDecoration: "none",
           color: "#262626",
@@ -36,6 +35,7 @@ let theme = createTheme({
       },
     },
   },
+
   typography: {
     h3: {
       fontWeight: 600,
@@ -43,6 +43,7 @@ let theme = createTheme({
     body1: {
       fontWeight: 500,
       fontSize: "1.5rem",
+      color: "#262626",
     },
     fontFamily: [
       "-apple-system",

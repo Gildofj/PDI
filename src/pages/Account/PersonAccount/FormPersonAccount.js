@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { Field, Form, Formik } from "formik";
-import { CardContent, Avatar } from "@material-ui/core";
+import { CardContent, Avatar } from "@mui/material";
 
 import useStyles from "./useStyles";
-import { TextField } from "@material-ui/core";
+import { TextField } from "@mui/material";
 
 const initialValuesPerson = {
   name: "",

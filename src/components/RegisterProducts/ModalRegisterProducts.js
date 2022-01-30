@@ -8,21 +8,21 @@ import {
   DialogTitle,
   IconButton,
   Typography,
-} from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
-import FormCadastrarProdutos from "./FormCadastrarProdutos";
+import FormRegisterProducts from "./FormRegisterProducts";
 import Flex from "../Flex";
 
 import useStyles from "./useStyles";
 
-ModalCadastrarProdutos.propTypes = {
+ModalRegisterProducts.propTypes = {
   product: PropTypes.object,
   icon: PropTypes.node,
   callback: PropTypes.func,
 };
 
-export default function ModalCadastrarProdutos({
+export default function ModalRegisterProducts({
   product,
   icon,
   callback,
@@ -31,9 +31,8 @@ export default function ModalCadastrarProdutos({
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-  const handleToggleOpen = (success = false) => {
+  const handleToggleOpen = () => {
     setOpen(!open);
-    callback(success);
   };
 
   return (
@@ -47,10 +46,11 @@ export default function ModalCadastrarProdutos({
             <Typography variant="h3">Cadastrar Produto</Typography>
           </DialogTitle>
           <DialogContent>
-            <FormCadastrarProdutos
+            <FormRegisterProducts
               product={product}
               sx={classes.form}
-              callback={handleToggleOpen}
+              callback={callback}
+              handleCloseModal={handleToggleOpen}
             />
           </DialogContent>
           <DialogActions>

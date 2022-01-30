@@ -1,11 +1,11 @@
 import { useState } from "react";
 import useSWR from "swr";
-import { Card, CardHeader, Divider, IconButton } from "@material-ui/core";
+import { Card, CardHeader, Divider, IconButton } from "@mui/material";
 
-import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
-import EditIcon from "@material-ui/icons/Edit";
-import CloseIcon from "@material-ui/icons/Close";
-import SaveIcon from "@material-ui/icons/Save";
+import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
+import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
+import SaveIcon from "@mui/icons-material/Save";
 
 import Flex from "../../../components/Flex";
 import useStyles from "./useStyles";

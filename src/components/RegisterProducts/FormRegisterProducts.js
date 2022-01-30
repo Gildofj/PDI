@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import api from "../../utils/api";
 import { Formik, Form, Field } from "formik";
-import { TextField } from "@material-ui/core";
+import { TextField } from "@mui/material";
 
 import useStyles from "./useStyles";
 
@@ -10,21 +10,23 @@ const intialValuesProduct = {
   price: "",
 };
 
-FormCadastrarProdutos.propTypes = {
+FormRegisterProducts.propTypes = {
   product: PropTypes.object,
   callback: PropTypes.func,
 };
 
-export default function FormCadastrarProdutos({
+export default function FormRegisterProducts({
   product = intialValuesProduct,
   callback,
+  handleCloseModal,
 }) {
   const classes = useStyles();
 
   async function handleSubmit(values) {
     try {
       await api.post("/products", values);
-      callback(true);
+      callback(true, values);
+      handleCloseModal();
     } catch (err) {
       return console.log(err);
     }

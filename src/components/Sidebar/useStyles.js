@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
 const drawerWidth = 240;
 
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: "nowrap",
+    boxSizing: "border-box",
   },
   drawerOpen: {
     width: drawerWidth,
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    overflowX: "hidden",
   },
   drawerClose: {
     transition: theme.transitions.create("width", {
@@ -30,15 +32,16 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: theme.spacing(7) + 1,
+    width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9) + 1,
+      width: `calc(${theme.spacing(9)} + 1px)`,
     },
   },
   toolbar: {
     display: "flex",
     alignItems: "center",
-    padding: theme.spacing(0, 1),
+    justifyContent: "flex-end",
+    padding: theme.spacing(0, 3),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },

@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "2rem !important",
   },
   iconButton: {
-    width: theme.spacing(4),
-    height: theme.spacing(4),
+    width: `${theme.spacing(4)}px !important`,
+    height: `${theme.spacing(4)}px !important`,
     color: "rgba(0, 0, 0, 0.87)",
   },
 }));

@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
 const useGlobalAccountStyles = makeStyles((theme) => ({
   header: {
@@ -6,8 +6,8 @@ const useGlobalAccountStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
   icon: {
-    width: theme.spacing(8),
-    height: theme.spacing(8),
+    width: `${theme.spacing(8)}px !important`,
+    height: `${theme.spacing(8)}px !important`,
   },
 }));
 

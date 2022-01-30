@@ -1,20 +1,22 @@
 import { useState } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
-import { useTheme } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import Drawer from "@material-ui/core/Drawer";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
-import Divider from "@material-ui/core/Divider";
+import { useTheme } from "@mui/material/styles";
+import {
+  List,
+  Drawer,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+  Divider,
+} from "@mui/material";
 
-import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
-import WorkRoundedIcon from "@material-ui/icons/WorkRounded";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
+import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import Flex from "../Flex";
 import useStyles from "./useStyles";
@@ -29,12 +31,10 @@ export default function Sidebar({ children, window }) {
 
   const handleDrawerOpen = () => {
     setOpen(true);
-    console.log(open);
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
-    console.log(open);
   };
 
   return (

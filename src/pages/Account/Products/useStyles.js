@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   paper: {
@@ -7,7 +7,7 @@ const useStyles = makeStyles({
   },
   buttonsSection: {
     position: "absolute",
-    display: "none",
+    display: "none !important",
   },
   row: {
     "&:hover": {
