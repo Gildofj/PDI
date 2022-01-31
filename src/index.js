@@ -23,10 +23,15 @@ let theme = createTheme({
           background: "#F6F7EB",
           color: "#262626",
           padding: "5px",
+          height: "100%",
         },
         body: {
-          height: "98vh",
+          height: "100%",
           width: "100%",
+
+          "div#root": {
+            height: "100%",
+          },
         },
         a: {
           textDecoration: "none",

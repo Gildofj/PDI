@@ -54,7 +54,9 @@ export default function ModalRegisterProducts({
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleToggleOpen}>Cancelar</Button>
+            <Button color="default" onClick={handleToggleOpen}>
+              Cancelar
+            </Button>
             <Button color="primary" type="submit" form="form-cadastro-produto">
               Cadastrar
             </Button>
