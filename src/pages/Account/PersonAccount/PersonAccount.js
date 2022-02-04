@@ -12,12 +12,13 @@ import useStyles from "./useStyles";
 import useGlobalAccountStyles from "../useGlobalAccountStyles";
 import FormPersonAccount from "./FormPersonAccount";
 
+// TODO: sugestão de nome pro componente: `PageAccountPerson` ou `AccountPerson` (baseado na estrutura dos arquivos)
 export default function PersonAccount() {
   const classes = useStyles();
   const globalClasses = useGlobalAccountStyles();
   const [isEdit, setIsEdit] = useState(false);
 
-  const { data: user } = useSWR("/users/618ec19444cf8bc3f603b360");
+  const { data: user } = useSWR("//localhost:3333/users/1");
 
   function handleToggleEdit() {
     setIsEdit(!isEdit);

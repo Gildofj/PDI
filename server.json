@@ -1,19 +1,29 @@
 {
-    "users": [
-        {
-        "id": 1,
-        "name": "Gildo Junior",
-        "email": "1gildojunior@gmail.com",
-        "phone": "48991333748",
-        "img": "https://i.ibb.co/5THScbt/1622786726671.jpg",
-        "isAdm": true
-        }
-    ],
-    "products": [
-        {
-            "id": 1,
-            "name": "Call of Duty",
-            "price": "300"
-        } 
-    ]
+  "users": [
+    {
+      "id": 1,
+      "name": "Gildo Junior",
+      "email": "1gildojunior@gmail.com",
+      "phone": "48991333748",
+      "img": "https://i.ibb.co/5THScbt/1622786726671.jpg",
+      "isAdm": true
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Call of Duty",
+      "price": "300"
+    },
+    {
+      "name": "dasdsadsada",
+      "price": "50",
+      "id": 2
+    },
+    {
+      "name": "Outro",
+      "price": "12,2",
+      "id": 3
+    }
+  ]
 }

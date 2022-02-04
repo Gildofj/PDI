@@ -1,3 +1,9 @@
+/**
+ * TODO: manter o index.js o menos "poluído" possível, pois é o ponto de entrada
+ * do app e deve facilitar a navegação pelo código pra quem está lendo.
+ * 
+ * Mover configuações do fetcher e tema de material-ui para outro arquivo e apenas importar
+ */
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
