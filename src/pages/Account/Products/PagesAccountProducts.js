@@ -17,9 +17,7 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import useStyles from "./useStyles";
 import useGlobalAccountStyles from "../useGlobalAccountStyles";
-import Flex from "../../../components/Flex";
-import RegisterProducts from "../../../components/RegisterProducts";
-import ConfirmModal from "../../../components/ConfirmModal";
+import { Flex, ConfirmModal, RegisterProducts } from "../../../components";
 import api from "../../../utils/api";
 
 const columns = [
@@ -27,8 +25,7 @@ const columns = [
   { id: "price", label: "Preço" },
 ];
 
-// TODO: sugestão de nome pro componente: `PageAccountProducts` ou `AccountProducts` (baseado na estrutura dos arquivos)
-export default function Products() {
+export default function PagesAccountProducts() {
   const classes = useStyles();
   const globalClasses = useGlobalAccountStyles();
 
@@ -87,12 +84,12 @@ export default function Products() {
                   >
                     {columns.map((column) => {
                       // TODO: outra ideia, poderia ser refatorado para um componente que renderiza o table cell e lida com essa lógica
-                      switch (column.id){
+                      switch (column.id) {
                         case "name":
                           return <TableCell>{product[column.id]}</TableCell>;
                         case "price":
-                          // TODO: usar método apropriado para formatar moeda 
-                          // @see: https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings 
+                          // TODO: usar método apropriado para formatar moeda
+                          // @see: https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings
                           return (
                             <TableCell>R$ {product[column.id]},00</TableCell>
                           );

@@ -7,13 +7,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import SaveIcon from "@mui/icons-material/Save";
 
-import Flex from "../../../components/Flex";
+import { Flex } from "../../../components";
 import useStyles from "./useStyles";
 import useGlobalAccountStyles from "../useGlobalAccountStyles";
 import FormPersonAccount from "./FormPersonAccount";
 
-// TODO: sugestão de nome pro componente: `PageAccountPerson` ou `AccountPerson` (baseado na estrutura dos arquivos)
-export default function PersonAccount() {
+export default function PagesAccountPerson() {
   const classes = useStyles();
   const globalClasses = useGlobalAccountStyles();
   const [isEdit, setIsEdit] = useState(false);

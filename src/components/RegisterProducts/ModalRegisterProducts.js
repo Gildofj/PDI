@@ -13,7 +13,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 import FormRegisterProducts from "./FormRegisterProducts";
 import useStyles from "./useStyles";
-import Flex from "../Flex";
+import Flex from "../_UI/Flex/Flex";
 
 ModalRegisterProducts.propTypes = {
   product: PropTypes.object,

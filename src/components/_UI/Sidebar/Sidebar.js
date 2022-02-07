@@ -18,7 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import Flex from "../Flex";
+import Flex from "../Flex/Flex";
 import useStyles from "./useStyles";
 
 export default function Sidebar({ children, window }) {

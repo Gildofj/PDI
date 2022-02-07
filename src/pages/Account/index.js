@@ -1,2 +1,2 @@
-export { default as PersonAccount } from "./PersonAccount";
-export { default as Products } from "./Products";
+export { default as PagesAccountPerson } from "./Person/PagesAccountPerson";
+export { default as PagesAccountProducts } from "./Products/PagesAccountProducts";

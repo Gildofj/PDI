@@ -4,9 +4,5 @@ import { useLoggedInUser } from "../store/reducers/user/selectors";
 export default function AuthRoute({ ...props }) {
   const loggedInUser = useLoggedInUser();
 
-  return loggedInUser !== null ? (
-    <Route {...props} />
-  ) : (
-    <Redirect to="/login" />
-  );
+  return loggedInUser ? <Route {...props} /> : <Redirect to="/login" />;
 }

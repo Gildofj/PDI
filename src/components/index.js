@@ -1,2 +1,7 @@
-// TODO: Sugestão:usar esse arquivo como index de todos os components para simplificar os imports
-export { default as Sidebar } from './_UI/Sidebar/Sidebar';
+// _UI
+export { default as Sidebar } from "./_UI/Sidebar/Sidebar";
+export { default as ConfirmModal } from "./_UI/ConfirmModal/ConfirmModal";
+export { default as Flex } from "./_UI/Flex/Flex";
+
+// Business rules
+export { default as RegisterProducts } from "./RegisterProducts/ModalRegisterProducts";
