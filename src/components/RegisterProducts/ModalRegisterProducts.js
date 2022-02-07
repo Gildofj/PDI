@@ -13,6 +13,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 import FormRegisterProducts from "./FormRegisterProducts";
 import useStyles from "./useStyles";
+import Flex from "../Flex";
 
 ModalRegisterProducts.propTypes = {
   product: PropTypes.object,
@@ -38,29 +39,29 @@ export default function ModalRegisterProducts({
       <IconButton onClick={handleToggleOpen} {...props}>
         {icon ? icon : <AddIcon {...props} />}
       </IconButton>
-      <Dialog open={open} onClose={handleToggleOpen} 
-      // TODO: Qual a necessidade desse estilo?
-      // className={classes.paper}
-      
-      >
-        {/* TODO: Qual a necessidade desse Flex aqui? */}
-        <DialogTitle>
-          <Typography variant="h3">Cadastrar Produto</Typography>
-        </DialogTitle>
-        <DialogContent>
-          <FormRegisterProducts
-            product={product}
-            sx={classes.form}
-            callback={callback}
-            handleCloseModal={handleToggleOpen}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleToggleOpen}>Cancelar</Button>
-          <Button color="primary" type="submit" form="form-cadastro-produto">
-            Cadastrar
-          </Button>
-        </DialogActions>
+
+      <Dialog open={open} onClose={handleToggleOpen} className={classes.paper}>
+        <Flex className={classes.flex}>
+          <DialogTitle>
+            <Typography variant="h3">Cadastrar Produto</Typography>
+          </DialogTitle>
+          <DialogContent>
+            <FormRegisterProducts
+              product={product}
+              sx={classes.form}
+              callback={callback}
+              handleCloseModal={handleToggleOpen}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button color="default" onClick={handleToggleOpen}>
+              Cancelar
+            </Button>
+            <Button color="primary" type="submit" form="form-cadastro-produto">
+              Cadastrar
+            </Button>
+          </DialogActions>
+        </Flex>
       </Dialog>
     </>
   );

@@ -14,11 +14,18 @@ import {
   ThemeProvider,
   responsiveFontSizes,
 } from "@mui/material/styles";
-
 import CssBaseline from "@mui/material/CssBaseline";
+import { Provider } from "react-redux";
+
+import store from "./store";
 
 const options = {
-  fetcher: (url) => api.get(url).then((res) => res.data),
+  suspense: false,
+  fetcher: (url) => api.get(url).then(({ data }) => data),
+  revalidateOnFocus: false,
+  revalidateOnReconnect: false,
+  shouldRetryOnError: false,
+  dedupingInterval: 5 * 60 * 1000,
 };
 
 let theme = createTheme({
@@ -29,10 +36,15 @@ let theme = createTheme({
           background: "#F6F7EB",
           color: "#262626",
           padding: "5px",
+          height: "100%",
         },
         body: {
-          height: "98vh",
+          height: "100%",
           width: "100%",
+
+          "div#root": {
+            height: "100%",
+          },
         },
         a: {
           textDecoration: "none",
@@ -67,11 +79,13 @@ let theme = createTheme({
 theme = responsiveFontSizes(theme);
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <SWRConfig value={options}>
-      <App />
-    </SWRConfig>
-  </ThemeProvider>,
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <SWRConfig value={options}>
+        <App />
+      </SWRConfig>
+    </ThemeProvider>
+  </Provider>,
   document.getElementById("root"),
 );

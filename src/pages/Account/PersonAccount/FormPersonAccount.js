@@ -3,7 +3,7 @@ import { Field, Form, Formik } from "formik";
 import { CardContent, Avatar } from "@mui/material";
 
 import useStyles from "./useStyles";
-import { TextField } from "@mui/material";
+import { TextField } from "formik-mui";
 
 const initialValuesPerson = {
   name: "",
@@ -29,8 +29,8 @@ export default function FormPersonAccount({
 
   return (
     <Formik initialValues={user} onSubmit={handleSubmit}>
-      {(values, handleSubmit) => (
-        <Form onSubmit={handleSubmit}>
+      {(values, isSubmitting) => (
+        <Form>
           <CardContent className={classes.form}>
             <Avatar
               className={classes.avatar}
@@ -38,41 +38,29 @@ export default function FormPersonAccount({
               alt={values.name}
             />
             <Field
+              component={TextField}
               name="name"
-              render={({ field, form: { isSubmitting } }) => (
-                <TextField
-                  {...field}
-                  label="Nome"
-                  variant="standard"
-                  className={classes.input}
-                  disabled={!isEdit || isSubmitting}
-                />
-              )}
+              label="Nome"
+              variant="standard"
+              className={classes.input}
+              disabled={!isEdit || isSubmitting}
             />
             <Field
+              component={TextField}
               name="email"
-              render={({ field, form: { isSubmitting } }) => (
-                <TextField
-                  {...field}
-                  label="Email"
-                  type="email"
-                  variant="standard"
-                  className={classes.input}
-                  disabled={!isEdit || isSubmitting}
-                />
-              )}
+              type="email"
+              label="Email"
+              variant="standard"
+              className={classes.input}
+              disabled={!isEdit || isSubmitting}
             />
             <Field
+              component={TextField}
               name="phone"
-              render={({ field, form: { isSubmitting } }) => (
-                <TextField
-                  {...field}
-                  label="Telefone"
-                  variant="standard"
-                  className={classes.input}
-                  disabled={!isEdit || isSubmitting}
-                />
-              )}
+              label="Telefone"
+              variant="standard"
+              className={classes.input}
+              disabled={!isEdit || isSubmitting}
             />
           </CardContent>
         </Form>

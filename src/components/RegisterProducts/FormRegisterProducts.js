@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import api from "../../utils/api";
 import { Formik, Form, Field } from "formik";
-import { TextField } from "@mui/material";
+import { TextField } from "formik-mui";
 
 import useStyles from "./useStyles";
 
@@ -49,29 +49,21 @@ export default function FormRegisterProducts({
       {({ isSubmitting }) => (
         <Form id="form-cadastro-produto" className={classes.form}>
           <Field
+            component={TextField}
             name="name"
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Nome"
-                variant="standard"
-                className={classes.input}
-                disabled={isSubmitting}
-              />
-            )}
+            label="Nome"
+            variant="standard"
+            className={classes.input}
+            disabled={isSubmitting}
           />
 
           <Field
+            component={TextField}
             name="price"
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Preço"
-                variant="standard"
-                className={classes.input}
-                disabled={isSubmitting}
-              />
-            )}
+            label="Preço"
+            variant="standard"
+            className={classes.input}
+            disabled={isSubmitting}
           />
         </Form>
       )}
