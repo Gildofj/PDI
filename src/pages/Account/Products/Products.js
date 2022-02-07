@@ -27,11 +27,12 @@ const columns = [
   { id: "price", label: "Preço" },
 ];
 
+// TODO: sugestão de nome pro componente: `PageAccountProducts` ou `AccountProducts` (baseado na estrutura dos arquivos)
 export default function Products() {
   const classes = useStyles();
   const globalClasses = useGlobalAccountStyles();
 
-  const { data: products, mutate } = useSWR("/products");
+  const { data: products, mutate } = useSWR("//localhost:3333/products");
 
   function cadastrarCallback(success, value) {
     if (success) mutate((data) => [...data, value]);
@@ -85,11 +86,19 @@ export default function Products() {
                     className={classes.row}
                   >
                     {columns.map((column) => {
-                      if (column.id === "price")
-                        return (
-                          <TableCell>{product[column.id]},00 R$</TableCell>
-                        );
-                      else return <TableCell>{product[column.id]}</TableCell>;
+                      // TODO: outra ideia, poderia ser refatorado para um componente que renderiza o table cell e lida com essa lógica
+                      switch (column.id){
+                        case "name":
+                          return <TableCell>{product[column.id]}</TableCell>;
+                        case "price":
+                          // TODO: usar método apropriado para formatar moeda 
+                          // @see: https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings 
+                          return (
+                            <TableCell>R$ {product[column.id]},00</TableCell>
+                          );
+                        default:
+                          return null;
+                      }
                     })}
                     <Flex className={classes.buttonsSection}>
                       <RegisterProducts icon={<EditIcon />} product={product} />

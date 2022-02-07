@@ -12,9 +12,8 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 
 import FormRegisterProducts from "./FormRegisterProducts";
-import Flex from "../Flex";
-
 import useStyles from "./useStyles";
+import Flex from "../Flex";
 
 ModalRegisterProducts.propTypes = {
   product: PropTypes.object,
@@ -40,6 +39,7 @@ export default function ModalRegisterProducts({
       <IconButton onClick={handleToggleOpen} {...props}>
         {icon ? icon : <AddIcon {...props} />}
       </IconButton>
+
       <Dialog open={open} onClose={handleToggleOpen} className={classes.paper}>
         <Flex className={classes.flex}>
           <DialogTitle>

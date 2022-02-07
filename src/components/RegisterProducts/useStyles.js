@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
       color: "#262626",
     },
     marginBottom: "2rem !important",
-    width: "40rem",
+    // width: "40rem",
   },
 }));
 
