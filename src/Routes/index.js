@@ -2,7 +2,7 @@ import { Switch, Route } from "react-router-dom";
 
 import { PagesAccountPerson, PagesAccountProducts, Login } from "../pages";
 import { Sidebar } from "../components";
-import AuthRoute from "./authRouter";
+import AuthRoute from "./AuthRoute";
 
 export default function Routes() {
   return (

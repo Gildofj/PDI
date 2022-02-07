@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { Button, Grid, Typography } from "@mui/material";
 import { Formik, Field, Form } from "formik";
 import { TextField } from "formik-mui";
-import api from "../../utils/api";
+import { useHistory } from "react-router-dom";
 
+import api from "../../utils/api";
 import ImgLogin from "../../images/login.png";
 import useStyles from "./useStyles";
 import useSWR from "swr";
@@ -18,15 +19,16 @@ const initialValues = {
 export default function Login() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const { data: user, mutate } = useSWR("/users/me", {
+  const { data, mutate } = useSWR("/users/me", {
     fallbackData: [],
     revalidateOnMount: false,
   });
 
   useEffect(() => {
-    dispatch(searchInformationForLoggedInUser(user));
-  }, [user, dispatch]);
+    if (data?.success) dispatch(searchInformationForLoggedInUser(data?.user));
+  }, [data, dispatch]);
 
   const handleSubmit = async (values) => {
     try {
@@ -35,10 +37,10 @@ export default function Login() {
         password: values.password,
       });
 
-      if (data?.token !== undefined) {
+      if (data?.token && data.token !== "") {
         api.defaults.headers.Authorization = "Bearer " + data.token;
-        mutate();
-        window.location.href = "/account/person/";
+        await mutate();
+        history.push("/account/person");
       }
     } catch (err) {
       alert(err);

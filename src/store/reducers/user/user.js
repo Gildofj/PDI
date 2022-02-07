@@ -1,9 +1,12 @@
 import { SEARCH_INFORMATION_FOR_LOGGED_IN_USER } from "./actions";
 
 const initialState = {
+  _id: "",
   name: "",
   username: "",
   token: "",
+  phone: "",
+  isAdm: false,
 };
 
 export default function user(state = initialState, action) {
@@ -15,6 +18,6 @@ export default function user(state = initialState, action) {
       };
     }
     default:
-      return null;
+      return state;
   }
 }

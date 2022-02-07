@@ -1,7 +1,6 @@
 import { useState } from "react";
 import useSWR from "swr";
 import { Card, CardHeader, Divider, IconButton } from "@mui/material";
-
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
@@ -11,13 +10,15 @@ import { Flex } from "../../../components";
 import useStyles from "./useStyles";
 import useGlobalAccountStyles from "../useGlobalAccountStyles";
 import FormPersonAccount from "./FormPersonAccount";
+import { useLoggedInUser } from "../../../store/reducers/user/selectors";
 
 export default function PagesAccountPerson() {
   const classes = useStyles();
   const globalClasses = useGlobalAccountStyles();
   const [isEdit, setIsEdit] = useState(false);
+  const { _id } = useLoggedInUser();
 
-  const { data: user } = useSWR("//localhost:3333/users/1");
+  const { data } = useSWR(`/users/${_id}`);
 
   function handleToggleEdit() {
     setIsEdit(!isEdit);
@@ -51,7 +52,9 @@ export default function PagesAccountPerson() {
         titleTypographyProps={{ variant: "h3" }}
       />
       <Divider />
-      {!!user && <FormPersonAccount user={user} isEdit={isEdit} />}
+      {!!data?.success && data?.user && (
+        <FormPersonAccount user={data?.user} isEdit={isEdit} />
+      )}
     </Card>
   );
 }

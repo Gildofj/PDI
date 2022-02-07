@@ -7,7 +7,7 @@ import { TextField } from "formik-mui";
 
 const initialValuesPerson = {
   name: "",
-  email: "",
+  username: "",
   phone: "",
   img: "",
 };
@@ -47,7 +47,7 @@ export default function FormPersonAccount({
             />
             <Field
               component={TextField}
-              name="email"
+              name="username"
               type="email"
               label="Email"
               variant="standard"

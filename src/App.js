@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import useSWR from "swr";
 import { useDispatch } from "react-redux";
 
-import Routes from "./Routes";
+import Routes from "./routes";
 import { searchInformationForLoggedInUser } from "./store/reducers/user/actions";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
   const { data } = useSWR("/users/me");
 
   useEffect(() => {
-    if (data) dispatch(searchInformationForLoggedInUser(data));
+    if (data?.success) dispatch(searchInformationForLoggedInUser(data?.user));
   }, [data, dispatch]);
 
   return (

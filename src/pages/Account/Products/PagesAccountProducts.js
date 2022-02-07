@@ -29,7 +29,7 @@ export default function PagesAccountProducts() {
   const classes = useStyles();
   const globalClasses = useGlobalAccountStyles();
 
-  const { data: products, mutate } = useSWR("//localhost:3333/products");
+  const { data: products, mutate } = useSWR("/products");
 
   function cadastrarCallback(success, value) {
     if (success) mutate((data) => [...data, value]);
