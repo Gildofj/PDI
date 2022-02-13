@@ -4,6 +4,7 @@ import { CardContent, Avatar } from "@mui/material";
 
 import useStyles from "./useStyles";
 import { TextField } from "formik-mui";
+import api from "../../../utils/api";
 
 const initialValuesPerson = {
   name: "",
@@ -15,16 +16,19 @@ const initialValuesPerson = {
 FormPersonAccount.propTypes = {
   user: PropTypes.object,
   isEdit: PropTypes.bool,
+  handleToggleEdit: PropTypes.func.isRequired,
 };
 
 export default function FormPersonAccount({
   user = initialValuesPerson,
   isEdit = true,
+  handleToggleEdit,
 }) {
   const classes = useStyles();
 
-  function handleSubmit(event) {
-    console.log("teste");
+  function handleSubmit(values) {
+    api.put(`/users/${user._id}`, values);
+    handleToggleEdit();
   }
 
   return (

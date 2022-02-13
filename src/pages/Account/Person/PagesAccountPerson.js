@@ -1,5 +1,4 @@
 import { useState } from "react";
-import useSWR from "swr";
 import { Card, CardHeader, Divider, IconButton } from "@mui/material";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import EditIcon from "@mui/icons-material/Edit";
@@ -16,9 +15,7 @@ export default function PagesAccountPerson() {
   const classes = useStyles();
   const globalClasses = useGlobalAccountStyles();
   const [isEdit, setIsEdit] = useState(false);
-  const { _id } = useLoggedInUser();
-
-  const { data } = useSWR(`/users/${_id}`);
+  const userLoggedIn = useLoggedInUser();
 
   function handleToggleEdit() {
     setIsEdit(!isEdit);
@@ -52,8 +49,12 @@ export default function PagesAccountPerson() {
         titleTypographyProps={{ variant: "h3" }}
       />
       <Divider />
-      {!!data?.success && data?.user && (
-        <FormPersonAccount user={data?.user} isEdit={isEdit} />
+      {userLoggedIn && (
+        <FormPersonAccount
+          user={userLoggedIn}
+          isEdit={isEdit}
+          handleToggleEdit={handleToggleEdit}
+        />
       )}
     </Card>
   );

@@ -30,12 +30,12 @@ export default function FormRegisterProducts({
 
   async function handleSubmit(values) {
     try {
-      await api.post("//localhost:3333/products", values);
+      await api.post("/products", values);
       callback(true, values);
       handleCloseModal();
     } catch (err) {
       callback(false, null);
-      console.log(err);
+      alert(err);
     }
   }
 

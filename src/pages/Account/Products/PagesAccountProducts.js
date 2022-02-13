@@ -13,12 +13,10 @@ import {
   Card,
 } from "@mui/material";
 
-import EditIcon from "@mui/icons-material/Edit";
-
 import useStyles from "./useStyles";
 import useGlobalAccountStyles from "../useGlobalAccountStyles";
-import { Flex, ConfirmModal, RegisterProducts } from "../../../components";
-import api from "../../../utils/api";
+import { Flex, RegisterProducts } from "../../../components";
+import ProductRow from "./ProductRow";
 
 const columns = [
   { id: "name", label: "Nome" },
@@ -31,13 +29,12 @@ export default function PagesAccountProducts() {
 
   const { data: products, mutate } = useSWR("/products");
 
-  function cadastrarCallback(success, value) {
+  function registerCallback(success, value) {
     if (success) mutate((data) => [...data, value]);
   }
 
-  function excluirCallback(id) {
-    api.delete(`/products/${id}`);
-    mutate((data) => data.filter((product) => product._id !== id));
+  function deleteCallback(success, id) {
+    if (success) mutate((data) => data.filter((product) => product._id !== id));
   }
 
   return (
@@ -50,7 +47,7 @@ export default function PagesAccountProducts() {
               <div>Produtos</div>
             </Flex>
             <Flex>
-              <RegisterProducts fontSize="large" callback={cadastrarCallback} />
+              <RegisterProducts fontSize="large" callback={registerCallback} />
             </Flex>
           </Flex>
         }
@@ -76,37 +73,12 @@ export default function PagesAccountProducts() {
               </TableHead>
               <TableBody>
                 {products.map((product) => (
-                  <TableRow
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={product._id}
-                    className={classes.row}
-                  >
-                    {columns.map((column) => {
-                      // TODO: outra ideia, poderia ser refatorado para um componente que renderiza o table cell e lida com essa lógica
-                      switch (column.id) {
-                        case "name":
-                          return <TableCell>{product[column.id]}</TableCell>;
-                        case "price":
-                          // TODO: usar método apropriado para formatar moeda
-                          // @see: https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-strings
-                          return (
-                            <TableCell>R$ {product[column.id]},00</TableCell>
-                          );
-                        default:
-                          return null;
-                      }
-                    })}
-                    <Flex className={classes.buttonsSection}>
-                      <RegisterProducts icon={<EditIcon />} product={product} />
-
-                      <ConfirmModal
-                        title="Excluir Produto"
-                        content="Se você excluir esse produto não sera possível recupera-lo. Deseja continuar?"
-                        callback={() => excluirCallback(product._id)}
-                      />
-                    </Flex>
-                  </TableRow>
+                  <ProductRow
+                    product={product}
+                    columns={columns}
+                    editCallback={registerCallback}
+                    deleteCallback={deleteCallback}
+                  />
                 ))}
               </TableBody>
             </Table>
