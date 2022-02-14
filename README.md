@@ -2,7 +2,7 @@
 
 ## Ideia do projeto ☁️
 
-Esse projeto foi desenvolvido visando aumentar meus conhecimentos acerca de algumas funcionalidades e tecnologias especificas, como [React](https://reactjs.org/), principalmente focando em seus [hooks](https://reactjs.org/docs/hooks-intro.html), manipulação do [Redux](https://redux.js.org/introduction/getting-started), estilização com [Material-UI](https://mui.com/pt/), criação de formularios genrenciados pelo [Formik](https://formik.org/docs/overview), e consultas ao banco com [SWR](https://swr.vercel.app/), para isso foi criado um software inicialmente apenas com a parte de gestão de um ecommerce onde foi visto o melhor potencial para utilizar todas essas ferramentas.
+Esse projeto foi desenvolvido visando aumentar meus conhecimentos acerca de algumas funcionalidades e tecnologias especificas, como [React](https://reactjs.org/), principalmente focando em seus [hooks](https://reactjs.org/docs/hooks-intro.html), manipulação do [Redux](https://redux.js.org/introduction/getting-started), estilização com [Material-UI](https://mui.com/pt/), criação de formularios genrenciados pelo [Formik](https://formik.org/docs/overview), consultas via API gerenciadas pela UI do [SWR](https://swr.vercel.app/), para isso foi criado um software inicialmente apenas com a parte de gestão de um ecommerce onde foi visto o melhor potencial para utilizar todas essas ferramentas.
 
 ## Executando o projeto ⚙️
 
