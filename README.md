@@ -9,7 +9,11 @@ Esse projeto foi desenvolvido visando aumentar meus conhecimentos acerca de algu
 Após clonar o repositório do projeto sera necessário clonar o repositório de seu [backend](https://github.com/Gildofj/pdi-backend) e executa-lo para o bom funcionamento de todas as funcionalidade implantadas no projeto, em seguida deve ser rodado o seguinte comando para executar o projeto:
 
 ```shell
-yarn start
+yarn start => Caso utilize yarn
+
+or 
+
+npm start
 ```
 
 Após executar esse comando ele vai baixar as dependências do projeto e em seguida iniciar o mesmo.
