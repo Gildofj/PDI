@@ -32,7 +32,11 @@ export default function PagesAccountPerson() {
             </Flex>
             <Flex className={globalClasses.header}>
               {isEdit && (
-                <IconButton type="submit" variant="secondary">
+                <IconButton
+                  type="submit"
+                  variant="secondary"
+                  form="form-update-person-data"
+                >
                   <SaveIcon className={classes.iconButton} />
                 </IconButton>
               )}

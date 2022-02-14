@@ -34,7 +34,7 @@ export default function FormPersonAccount({
   return (
     <Formik initialValues={user} onSubmit={handleSubmit}>
       {(values, isSubmitting) => (
-        <Form>
+        <Form id="form-update-person-data">
           <CardContent className={classes.form}>
             <Avatar
               className={classes.avatar}

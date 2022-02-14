@@ -2,22 +2,34 @@ import PropTypes from "prop-types";
 import { TableCell, TableRow } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
-import { Flex, ConfirmModal, RegisterProducts } from "../../../components";
+import {
+  Flex,
+  ConfirmModal,
+  RegisterProducts,
+  Draggable,
+} from "../../../components";
 import api from "../../../utils/api";
 import { formatCurrency } from "../../../utils/stringHelper";
 import useStyles from "./useStyles";
 
 ProductRow.propTypes = {
+  index: PropTypes.number,
   product: PropTypes.object.isRequired,
+  products: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
   editCallback: PropTypes.func.isRequired,
   deleteCallback: PropTypes.func.isRequired,
+  dropCallback: PropTypes.func.isRequired,
 };
 export default function ProductRow({
+  index,
   product,
   columns,
   editCallback,
   deleteCallback,
+  products,
+  dropCallback,
+  ...props
 }) {
   const classes = useStyles();
 
@@ -32,11 +44,14 @@ export default function ProductRow({
   };
 
   return (
-    <TableRow
-      role="checkbox"
-      tabIndex={-1}
-      key={product._id}
+    <Draggable
+      index={index}
+      component={TableRow}
+      items={products}
+      callback={dropCallback}
       className={classes.row}
+      tabIndex={-1}
+      {...props}
     >
       {columns.map((column) => {
         switch (column.id) {
@@ -49,7 +64,11 @@ export default function ProductRow({
         }
       })}
       <Flex className={classes.buttonsSection}>
-        <RegisterProducts icon={<EditIcon />} product={product} />
+        <RegisterProducts
+          icon={<EditIcon />}
+          product={product}
+          callback={editCallback}
+        />
 
         <ConfirmModal
           title="Excluir Produto"
@@ -57,6 +76,6 @@ export default function ProductRow({
           callback={() => deleteProduct({ id: product._id })}
         />
       </Flex>
-    </TableRow>
+    </Draggable>
   );
 }

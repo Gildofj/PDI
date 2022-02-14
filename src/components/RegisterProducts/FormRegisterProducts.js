@@ -42,7 +42,7 @@ export default function FormRegisterProducts({
   return (
     <Formik initialValues={product} onSubmit={handleSubmit}>
       {({ isSubmitting }) => (
-        <Form id="form-cadastro-produto" className={classes.form}>
+        <Form id="form-register-product" className={classes.form}>
           <Field
             component={TextField}
             name="name"

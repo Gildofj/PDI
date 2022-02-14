@@ -17,6 +17,7 @@ import useStyles from "./useStyles";
 import useGlobalAccountStyles from "../useGlobalAccountStyles";
 import { Flex, RegisterProducts } from "../../../components";
 import ProductRow from "./ProductRow";
+import api from "../../../utils/api";
 
 const columns = [
   { id: "name", label: "Nome" },
@@ -29,13 +30,19 @@ export default function PagesAccountProducts() {
 
   const { data: products, mutate } = useSWR("/products");
 
-  function registerCallback(success, value) {
+  const registerCallback = (success, value) => {
     if (success) mutate((data) => [...data, value]);
-  }
+  };
 
-  function deleteCallback(success, id) {
+  const deleteCallback = (success, id) => {
     if (success) mutate((data) => data.filter((product) => product._id !== id));
-  }
+  };
+
+  const dropCallback = (products) => {
+    console.log(products);
+    // api.put("/products", products);
+    // mutate(products);
+  };
 
   return (
     <Card>
@@ -61,23 +68,20 @@ export default function PagesAccountProducts() {
               <TableHead>
                 <TableRow>
                   {columns.map((column) => (
-                    <TableCell
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth }}
-                    >
-                      {column.label}
-                    </TableCell>
+                    <TableCell key={column.id}>{column.label}</TableCell>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {products.map((product) => (
+                {products.map((product, index) => (
                   <ProductRow
+                    index={index}
                     product={product}
                     columns={columns}
                     editCallback={registerCallback}
                     deleteCallback={deleteCallback}
+                    dropCallback={dropCallback}
+                    products={products}
                   />
                 ))}
               </TableBody>

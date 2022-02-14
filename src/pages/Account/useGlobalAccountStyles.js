@@ -6,8 +6,8 @@ const useGlobalAccountStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
   icon: {
-    width: `${theme.spacing(8)}px !important`,
-    height: `${theme.spacing(8)}px !important`,
+    width: `${theme.spacing(5)} !important`,
+    height: `${theme.spacing(5)} !important`,
   },
 }));
 

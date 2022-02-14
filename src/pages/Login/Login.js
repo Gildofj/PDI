@@ -77,7 +77,6 @@ export default function Login() {
               />
 
               <Grid sx={{ marginTop: "1rem" }}>
-                <Button variant="text">Cancelar</Button>
                 <Button variant="text" type="submit">
                   Entrar
                 </Button>
