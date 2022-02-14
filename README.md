@@ -12,4 +12,4 @@ Após clonar o repositório do projeto sera necessário clonar o repositório de
 yarn start
 ```
 
-Após executar esse comando ele vai baixar as dependências do projeto e em seguida iniciar o mesmo,
+Após executar esse comando ele vai baixar as dependências do projeto e em seguida iniciar o mesmo.
