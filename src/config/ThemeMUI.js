@@ -36,9 +36,15 @@ export default function ThemeProvider({ children }) {
       h3: {
         fontWeight: 600,
       },
+      h4: {
+        fontWeight: 600,
+      },
+      h5: {
+        fontWeight: 600,
+      },
       body1: {
         fontWeight: 500,
-        fontSize: "1.5rem",
+        fontSize: "1rem",
         color: "#262626",
       },
       fontFamily: [

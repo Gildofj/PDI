@@ -9,9 +9,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   paper: {
-    position: "absolute",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
   },
   form: {
     display: "flex",
@@ -23,8 +21,9 @@ const useStyles = makeStyles((theme) => ({
     "&:disabled": {
       color: "#262626",
     },
-    marginBottom: "2rem !important",
-    // width: "40rem",
+    "&.label[data-shrink=true]": {
+      marginBottom: "1rem !important",
+    },
   },
 }));
 

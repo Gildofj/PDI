@@ -13,7 +13,7 @@ import { formatCurrency } from "../../../utils/stringHelper";
 import useStyles from "./useStyles";
 
 ProductRow.propTypes = {
-  index: PropTypes.number,
+  index: PropTypes.number.isRequired,
   product: PropTypes.object.isRequired,
   products: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
@@ -21,6 +21,7 @@ ProductRow.propTypes = {
   deleteCallback: PropTypes.func.isRequired,
   dropCallback: PropTypes.func.isRequired,
 };
+
 export default function ProductRow({
   index,
   product,
@@ -45,6 +46,7 @@ export default function ProductRow({
 
   return (
     <Draggable
+      id={product._id}
       index={index}
       component={TableRow}
       items={products}

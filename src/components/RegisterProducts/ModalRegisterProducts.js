@@ -7,7 +7,6 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -42,9 +41,7 @@ export default function ModalRegisterProducts({
 
       <Dialog open={open} onClose={handleToggleOpen} className={classes.paper}>
         <Flex className={classes.flex}>
-          <DialogTitle>
-            <Typography variant="h3">Cadastrar Produto</Typography>
-          </DialogTitle>
+          <DialogTitle sx={{fontSize: "2rem"}}>Cadastrar Produto</DialogTitle>
           <DialogContent>
             <FormRegisterProducts
               product={product}
@@ -54,10 +51,8 @@ export default function ModalRegisterProducts({
             />
           </DialogContent>
           <DialogActions>
-            <Button color="default" onClick={handleToggleOpen}>
-              Cancelar
-            </Button>
-            <Button color="primary" type="submit" form="form-register-product">
+            <Button onClick={handleToggleOpen}>Cancelar</Button>
+            <Button type="submit" form="form-register-product">
               Cadastrar
             </Button>
           </DialogActions>

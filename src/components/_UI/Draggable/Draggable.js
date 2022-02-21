@@ -1,8 +1,11 @@
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import PropTypes from "prop-types";
+import update from "immutability-helper";
+
 import useDraggable from "./useDraggable";
 
 Draggable.propTypes = {
+  id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   children: PropTypes.node.isRequired,
   items: PropTypes.array.isRequired,
@@ -11,6 +14,7 @@ Draggable.propTypes = {
 };
 
 export default function Draggable({
+  id,
   index,
   children,
   items,
@@ -18,22 +22,35 @@ export default function Draggable({
   component: Component,
   ...props
 }) {
-  const dragItem = useRef();
-  const dragOverItem = useRef();
-  const [dragStart, dragEnter, drop] = useDraggable({
-    dragItem,
-    dragOverItem,
-    items,
-    callback,
+  const ref = useRef(null);
+
+  const moveItem = useCallback(
+    (dragIndex, hoverIndex) => {
+      const itemsUpdated = update(items, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, items[dragIndex]],
+        ],
+      });
+
+      callback(itemsUpdated);
+    },
+    [items, callback],
+  );
+
+  const [drag, drop, handlerId, opacity] = useDraggable({
+    idItem: id,
+    ref,
+    index,
+    moveItem,
   });
 
+  drag(drop(ref));
   return (
     <Component
-      draggable
-      key={index}
-      onDragStart={(e) => dragStart(e, index)}
-      onDragEnter={(e) => dragEnter(e, index)}
-      onDragEnd={drop}
+      ref={ref}
+      data-handler-id={handlerId}
+      className={{ opacity }}
       {...props}
     >
       {children}

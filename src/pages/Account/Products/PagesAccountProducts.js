@@ -38,10 +38,16 @@ export default function PagesAccountProducts() {
     if (success) mutate((data) => data.filter((product) => product._id !== id));
   };
 
-  const dropCallback = (products) => {
-    console.log(products);
-    // api.put("/products", products);
-    // mutate(products);
+  const dropCallback = async (productsDnD) => {
+    try {
+      productsDnD.forEach((product, index) => {
+        product.position = index + 1;
+      });
+      await api.put("/products", productsDnD);
+      mutate();
+    } catch (err) {
+      alert(err);
+    }
   };
 
   return (
@@ -54,7 +60,7 @@ export default function PagesAccountProducts() {
               <div>Produtos</div>
             </Flex>
             <Flex>
-              <RegisterProducts fontSize="large" callback={registerCallback} />
+              <RegisterProducts callback={registerCallback} />
             </Flex>
           </Flex>
         }
@@ -62,7 +68,7 @@ export default function PagesAccountProducts() {
       />
       <Divider />
       {products && (
-        <Paper sx={classes.paper}>
+        <Paper className={classes.paper}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
@@ -73,17 +79,20 @@ export default function PagesAccountProducts() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {products.map((product, index) => (
-                  <ProductRow
-                    index={index}
-                    product={product}
-                    columns={columns}
-                    editCallback={registerCallback}
-                    deleteCallback={deleteCallback}
-                    dropCallback={dropCallback}
-                    products={products}
-                  />
-                ))}
+                {products
+                  .sort((a, b) => a.position - b.position)
+                  .map((product, index) => (
+                    <ProductRow
+                      key={product._id}
+                      index={index}
+                      product={product}
+                      columns={columns}
+                      editCallback={registerCallback}
+                      deleteCallback={deleteCallback}
+                      dropCallback={dropCallback}
+                      products={products}
+                    />
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>

@@ -53,7 +53,7 @@ export default function Login() {
         <img src={ImgLogin} alt="ecommerce" />
       </Grid>
       <Grid item className={classes.formSections}>
-        <Typography>Login</Typography>
+        <Typography variant="h5">Login</Typography>
 
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           {({ isSubmitting }) => (

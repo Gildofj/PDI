@@ -7,13 +7,13 @@ const useStyles = makeStyles({
     justifyContent: "center",
   },
   imgSections: {
-    width: "76%",
+    width: "72%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   formSections: {
-    padding: "4rem",
+    width: "27%",
     display: "flex",
     flexDirection: "column !important",
     alignItems: "center",
