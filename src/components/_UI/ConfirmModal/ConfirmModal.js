@@ -5,17 +5,19 @@ import {
   DialogTitle,
   DialogActions,
   Button,
-  IconButton,
   Typography,
+  Tooltip,
+  IconButton,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function ConfirmModal({
   title,
   content,
+  tooltip = "Open Modal",
   cancelText = "Cancelar",
   confirmText = "Confirmar",
   callback,
+  icon,
 }) {
   const [open, setOpen] = useState(false);
 
@@ -30,9 +32,17 @@ export default function ConfirmModal({
 
   return (
     <>
-      <IconButton onClick={handleToggleOpen}>
-        <DeleteIcon />
-      </IconButton>
+      {!!icon && (
+        <Tooltip title={tooltip}>
+          <IconButton onClick={handleToggleOpen}>{icon}</IconButton>
+        </Tooltip>
+      )}
+      {!icon && (
+        <Tooltip title={tooltip}>
+          <Button onClick={handleToggleOpen}>{tooltip}</Button>
+        </Tooltip>
+      )}
+
       <Dialog open={open} onClose={handleToggleOpen}>
         <DialogTitle>
           <Typography variant="h3">{title}</Typography>

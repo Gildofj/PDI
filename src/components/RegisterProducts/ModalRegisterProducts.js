@@ -7,6 +7,7 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
+  Tooltip,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -18,12 +19,14 @@ ModalRegisterProducts.propTypes = {
   product: PropTypes.object,
   icon: PropTypes.node,
   callback: PropTypes.func,
+  tooltip: PropTypes.string,
 };
 
 export default function ModalRegisterProducts({
   product,
   icon,
   callback,
+  tooltip = "Cadastrar Produto",
   ...props
 }) {
   const classes = useStyles();
@@ -35,13 +38,15 @@ export default function ModalRegisterProducts({
 
   return (
     <>
-      <IconButton onClick={handleToggleOpen} {...props}>
-        {icon ? icon : <AddIcon {...props} />}
-      </IconButton>
+      <Tooltip title={tooltip}>
+        <IconButton onClick={handleToggleOpen} {...props}>
+          {icon ? icon : <AddIcon {...props} />}
+        </IconButton>
+      </Tooltip>
 
       <Dialog open={open} onClose={handleToggleOpen} className={classes.paper}>
         <Flex className={classes.flex}>
-          <DialogTitle sx={{fontSize: "2rem"}}>Cadastrar Produto</DialogTitle>
+          <DialogTitle sx={{ fontSize: "2rem" }}>Cadastrar Produto</DialogTitle>
           <DialogContent>
             <FormRegisterProducts
               product={product}

@@ -28,7 +28,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "prestart": "yarn cache clean && yarn install --network-timeout 500000",
+    "prestart": "yarn install --check-cache",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

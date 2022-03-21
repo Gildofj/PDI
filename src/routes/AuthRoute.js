@@ -1,14 +1,14 @@
 import { Route, Redirect } from "react-router-dom";
-import { useLoggedInUser } from "../store/reducers/user/selectors";
+import { useLocalStorage } from "../hooks";
 
 export default function AuthRoute({ component: Component, ...rest }) {
-  const loggedInUser = useLoggedInUser();
+  const [user] = useLocalStorage("user", "");
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        loggedInUser.token !== "" ? (
+        user?.token !== "" ? (
           <Component {...props} />
         ) : (
           <Redirect

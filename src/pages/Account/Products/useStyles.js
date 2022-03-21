@@ -17,6 +17,9 @@ const useStyles = makeStyles({
       },
     },
   },
+  drag: {
+    cursor: "move",
+  },
 });
 
 export default useStyles;

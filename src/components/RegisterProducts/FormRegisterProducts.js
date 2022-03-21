@@ -5,7 +5,7 @@ import { TextField } from "formik-mui";
 
 import useStyles from "./useStyles";
 
-const intialValuesProduct = {
+const initialValuesProduct = {
   name: "",
   price: "",
 };
@@ -22,7 +22,7 @@ FormRegisterProducts.propTypes = {
  */
 
 export default function FormRegisterProducts({
-  product = intialValuesProduct,
+  product = initialValuesProduct,
   callback,
   handleCloseModal,
 }) {

@@ -5,10 +5,12 @@ import { useDispatch } from "react-redux";
 
 import Routes from "./routes";
 import { searchInformationForLoggedInUser } from "./store/reducers/user/actions";
+import { useLocalStorage } from "./hooks";
 
 function App() {
   const dispatch = useDispatch();
-  const { data } = useSWR("/users/me");
+  const [user] = useLocalStorage("user", null);
+  const { data } = useSWR(!user ? "/users/me" : null);
 
   useEffect(() => {
     if (data?.success) dispatch(searchInformationForLoggedInUser(data?.user));

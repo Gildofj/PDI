@@ -1,5 +1,8 @@
 import useSWR from "swr";
 import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
+import FormatListNumberedRtlIcon from "@mui/icons-material/FormatListNumberedRtl";
+import CloseIcon from "@mui/icons-material/Close";
+import SaveIcon from "@mui/icons-material/Save";
 import {
   Table,
   TableBody,
@@ -11,12 +14,14 @@ import {
   Divider,
   CardHeader,
   Card,
+  IconButton,
 } from "@mui/material";
 
 import useStyles from "./useStyles";
 import useGlobalAccountStyles from "../useGlobalAccountStyles";
 import { Flex, RegisterProducts } from "../../../components";
-import ProductRow from "./ProductRow";
+import { ProductRow } from "./ProductRow";
+import { useCallback, useState } from "react";
 import api from "../../../utils/api";
 
 const columns = [
@@ -27,28 +32,76 @@ const columns = [
 export default function PagesAccountProducts() {
   const classes = useStyles();
   const globalClasses = useGlobalAccountStyles();
+  const [productsForEdit, setProductsForEdit] = useState([]);
+  const [canDrag, setCanDrag] = useState(false);
 
   const { data: products, mutate } = useSWR("/products");
 
-  const registerCallback = (success, value) => {
-    if (success) mutate((data) => [...data, value]);
-  };
+  const registerCallback = useCallback(
+    (success, value) => {
+      if (success) mutate((data) => [...data, value]);
+    },
+    [mutate],
+  );
 
-  const deleteCallback = (success, id) => {
-    if (success) mutate((data) => data.filter((product) => product._id !== id));
-  };
+  const deleteCallback = useCallback(
+    (success, id) => {
+      if (success)
+        mutate((data) => data.filter((product) => product._id !== id));
+    },
+    [mutate],
+  );
 
-  const dropCallback = async (productsDnD) => {
-    try {
-      productsDnD.forEach((product, index) => {
-        product.position = index + 1;
-      });
-      await api.put("/products", productsDnD);
-      mutate();
-    } catch (err) {
-      alert(err);
-    }
-  };
+  const moveProduct = useCallback(
+    (dragPosition, hoverPosition) => {
+      const dragProduct = productsForEdit.find(
+        (product) => product.position === dragPosition,
+      );
+      const hoverProduct = productsForEdit.find(
+        (product) => product.position === hoverPosition,
+      );
+
+      dragProduct.position = hoverPosition;
+      hoverProduct.position = dragPosition;
+
+      setProductsForEdit((initialOrder) => [
+        ...initialOrder.filter(
+          (p) => p._id !== dragProduct._id && p._id !== hoverProduct._id,
+        ),
+        dragProduct,
+        hoverProduct,
+      ]);
+    },
+    [productsForEdit],
+  );
+
+  const editListProducts = useCallback(() => {
+    setProductsForEdit(products);
+    setCanDrag(true);
+  }, [products]);
+
+  const saveOrderProduct = useCallback(async () => {
+    await api.put("/products", productsForEdit);
+    setProductsForEdit([]);
+    setCanDrag(false);
+    mutate();
+  }, [mutate, productsForEdit]);
+
+  const renderRow = useCallback(
+    (product, index) => (
+      <ProductRow
+        key={product._id}
+        index={index}
+        product={product}
+        columns={columns}
+        editCallback={registerCallback}
+        deleteCallback={deleteCallback}
+        moveProduct={moveProduct}
+        canDrag={canDrag}
+      />
+    ),
+    [deleteCallback, moveProduct, registerCallback, canDrag],
+  );
 
   return (
     <Card>
@@ -60,7 +113,24 @@ export default function PagesAccountProducts() {
               <div>Produtos</div>
             </Flex>
             <Flex>
-              <RegisterProducts callback={registerCallback} />
+              {!canDrag && (
+                <>
+                  <IconButton onClick={editListProducts}>
+                    <FormatListNumberedRtlIcon />
+                  </IconButton>
+                  <RegisterProducts callback={registerCallback} />
+                </>
+              )}
+              {canDrag && (
+                <>
+                  <IconButton onClick={() => setCanDrag(false)}>
+                    <CloseIcon />
+                  </IconButton>
+                  <IconButton onClick={saveOrderProduct}>
+                    <SaveIcon />
+                  </IconButton>
+                </>
+              )}
             </Flex>
           </Flex>
         }
@@ -79,20 +149,14 @@ export default function PagesAccountProducts() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {products
-                  .sort((a, b) => a.position - b.position)
-                  .map((product, index) => (
-                    <ProductRow
-                      key={product._id}
-                      index={index}
-                      product={product}
-                      columns={columns}
-                      editCallback={registerCallback}
-                      deleteCallback={deleteCallback}
-                      dropCallback={dropCallback}
-                      products={products}
-                    />
-                  ))}
+                {!canDrag &&
+                  products
+                    .sort((a, b) => a.position - b.position)
+                    .map((product, index) => renderRow(product, index))}
+                {canDrag &&
+                  productsForEdit
+                    .sort((a, b) => a.position - b.position)
+                    .map((product) => renderRow(product))}
               </TableBody>
             </Table>
           </TableContainer>
